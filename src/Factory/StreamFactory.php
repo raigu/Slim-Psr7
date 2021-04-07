@@ -73,6 +73,9 @@ class StreamFactory implements StreamFactoryInterface
 
         set_error_handler(function (int $errno, string $errstr) use ($errorHandler) {
             $errorHandler($errstr);
+
+            /* Don't execute PHP internal error handler, because we we are going to throw custom exception */
+            return true;
         });
 
         try {
